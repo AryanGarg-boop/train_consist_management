@@ -108,6 +108,31 @@ public class TrainConsistManagementApp {
         System.out.println("After Removing First and Last Bogie:");
         System.out.println(orderedConsist + "\n");
 
-        System.out.println("UC4 ordered consist operations completed...");
+        System.out.println("UC4 ordered consist operations completed...\n");
+
+        // -------------UC5----------
+
+        System.out.println("========================================");
+        System.out.println(" UC5 - Preserve Insertion Order of Bogies ");
+        System.out.println("========================================\n");
+
+        // LinkedHashSet preserves order and ensures uniqueness
+        Set<String> formation = new LinkedHashSet<>();
+
+        formation.add("Engine");
+        formation.add("Sleeper");
+        formation.add("Cargo");
+        formation.add("Guard");
+
+        // Attempting to attach a duplicate bogie
+        formation.add("Sleeper"); // Duplicate entry
+
+        System.out.println("Final Train Formation:");
+        System.out.println(formation + "\n");
+
+        System.out.println("Note:");
+        System.out.println("LinkedHashSet preserves insertion order and removes duplicates automatically.\n");
+
+        System.out.println("UC5 formation setup completed...\n");
     }
 }

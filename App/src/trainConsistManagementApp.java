@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 // Custom Object representing a Bogie
 class Bogie {
@@ -47,7 +48,6 @@ public class TrainConsistManagementApp {
         System.out.println(" UC2 - Add Passenger Bogies to Train ");
         System.out.println("========================================\n");
 
-        // ---- CREATE (Add bogies) ----
         trainConsist.add("Sleeper");
         trainConsist.add("AC Chair");
         trainConsist.add("First Class");
@@ -55,13 +55,11 @@ public class TrainConsistManagementApp {
         System.out.println("After Adding Bogies:");
         System.out.println("Passenger Bogies : " + trainConsist + "\n");
 
-        // ---- DELETE (Remove a bogie) ----
         trainConsist.remove("AC Chair");
 
         System.out.println("After Removing 'AC Chair':");
         System.out.println("Passenger Bogies : " + trainConsist + "\n");
 
-        // ---- READ (Check for availability) ----
         System.out.println("Checking if 'Sleeper' exists:");
         boolean hasSleeper = trainConsist.contains("Sleeper");
         System.out.println("Contains Sleeper? : " + hasSleeper + "\n");
@@ -77,18 +75,13 @@ public class TrainConsistManagementApp {
         System.out.println(" UC3 - Track Unique Bogie IDs ");
         System.out.println("========================================\n");
 
-        // Create a Set to store unique bogie IDs
-        // HashSet stores only unique values
         Set<String> bogies = new HashSet<>();
 
-        // ---- ADD IDs (including duplicates) ----
-        // add() inserts bogie IDs into the set
         bogies.add("BG101");
         bogies.add("BG102");
         bogies.add("BG103");
         bogies.add("BG104");
 
-        // Duplicate entries will be ignored internally by HashSet
         bogies.add("BG101"); // Duplicate entry
         bogies.add("BG102"); // Duplicate entry
 
@@ -106,8 +99,6 @@ public class TrainConsistManagementApp {
         System.out.println(" UC4 - Maintain Ordered Bogie Consist ");
         System.out.println("========================================\n");
 
-        // Create a LinkedList
-        // LinkedList maintains insertion order and allows fast inserts
         LinkedList<String> orderedConsist = new LinkedList<>();
 
         orderedConsist.add("Engine");
@@ -119,13 +110,11 @@ public class TrainConsistManagementApp {
         System.out.println("Initial Train Consist:");
         System.out.println(orderedConsist + "\n");
 
-        // Insert 'Pantry Car' at position 2 (index 2)
         orderedConsist.add(2, "Pantry Car");
 
         System.out.println("After Inserting 'Pantry Car' at position 2:");
         System.out.println(orderedConsist + "\n");
 
-        // Remove the first and last bogie
         orderedConsist.removeFirst();
         orderedConsist.removeLast();
 
@@ -140,7 +129,6 @@ public class TrainConsistManagementApp {
         System.out.println(" UC5 - Preserve Insertion Order of Bogies ");
         System.out.println("========================================\n");
 
-        // LinkedHashSet preserves order and ensures uniqueness
         Set<String> formation = new LinkedHashSet<>();
 
         formation.add("Engine");
@@ -148,7 +136,6 @@ public class TrainConsistManagementApp {
         formation.add("Cargo");
         formation.add("Guard");
 
-        // Attempting to attach a duplicate bogie
         formation.add("Sleeper"); // Duplicate entry
 
         System.out.println("Final Train Formation:");
@@ -165,17 +152,14 @@ public class TrainConsistManagementApp {
         System.out.println(" UC6 - Map Bogie to Capacity (HashMap) ");
         System.out.println("========================================\n");
 
-        // HashMap stores data in key -> value format
         Map<String, Integer> capacityMap = new HashMap<>();
 
-        // ---- Insert bogie capacities ----
         capacityMap.put("First Class", 24);
         capacityMap.put("Cargo", 120);
         capacityMap.put("Sleeper", 72);
         capacityMap.put("AC Chair", 56);
 
         System.out.println("Bogie Capacity Details:");
-        // Iterate through the map entries to display the mapping
         for (Map.Entry<String, Integer> entry : capacityMap.entrySet()) {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
@@ -189,7 +173,6 @@ public class TrainConsistManagementApp {
         System.out.println(" UC7 - Sort Bogies by Capacity (Comparator) ");
         System.out.println("========================================\n");
 
-        // Create a List to store custom Bogie objects
         List<Bogie> bogieObjects = new ArrayList<>();
         bogieObjects.add(new Bogie("Sleeper", 72));
         bogieObjects.add(new Bogie("AC Chair", 56));
@@ -202,7 +185,6 @@ public class TrainConsistManagementApp {
         }
         System.out.println();
 
-        // Apply a Comparator to sort by capacity using a Lambda expression / Method Reference
         bogieObjects.sort(Comparator.comparingInt(Bogie::getCapacity));
 
         System.out.println("After Sorting by Capacity:");
@@ -211,6 +193,38 @@ public class TrainConsistManagementApp {
         }
         System.out.println();
 
-        System.out.println("UC7 sorting completed...");
+        System.out.println("UC7 sorting completed...\n");
+
+        // -------------UC8----------
+
+        System.out.println("========================================");
+        System.out.println(" UC8 - Filter Passenger Bogies Using Streams ");
+        System.out.println("========================================\n");
+
+        // Recreating the initial unordered list for the exact output shown in UC8
+        List<Bogie> streamBogies = new ArrayList<>();
+        streamBogies.add(new Bogie("Sleeper", 72));
+        streamBogies.add(new Bogie("AC Chair", 56));
+        streamBogies.add(new Bogie("First Class", 24));
+        streamBogies.add(new Bogie("General", 90));
+
+        System.out.println("All Bogies:");
+        for (Bogie b : streamBogies) {
+            System.out.println(b);
+        }
+        System.out.println();
+
+        // Stream API: Filter bogies with capacity > 60
+        List<Bogie> filteredBogies = streamBogies.stream()
+                .filter(b -> b.getCapacity() > 60)
+                .collect(Collectors.toList());
+
+        System.out.println("Filtered Bogies (Capacity > 60):");
+        for (Bogie b : filteredBogies) {
+            System.out.println(b);
+        }
+        System.out.println();
+
+        System.out.println("UC8 filtering completed...");
     }
 }

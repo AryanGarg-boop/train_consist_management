@@ -45,6 +45,35 @@ public class TrainConsistManagementApp {
         System.out.println("Final Train Passenger Consist:");
         System.out.println(trainConsist + "\n");
 
-        System.out.println("UC2 operations completed successfully...");
+        System.out.println("UC2 operations completed successfully...\n");
+
+        // -------------UC3----------
+
+        System.out.println("========================================");
+        System.out.println(" UC3 - Track Unique Bogie IDs ");
+        System.out.println("========================================\n");
+
+        // Create a Set to store unique bogie IDs
+        // HashSet stores only unique values
+        Set<String> bogies = new HashSet<>();
+
+        // ---- ADD IDs (including duplicates) ----
+        // add() inserts bogie IDs into the set
+        bogies.add("BG101");
+        bogies.add("BG102");
+        bogies.add("BG103");
+        bogies.add("BG104");
+
+        // Duplicate entries will be ignored internally by HashSet
+        bogies.add("BG101"); // Duplicate entry
+        bogies.add("BG102"); // Duplicate entry
+
+        System.out.println("Bogie IDs After Insertion:");
+        System.out.println(bogies + "\n");
+
+        System.out.println("Note:");
+        System.out.println("Duplicates are automatically ignored by HashSet.\n");
+
+        System.out.println("UC3 uniqueness validation completed...");
     }
 }

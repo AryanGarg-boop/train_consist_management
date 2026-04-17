@@ -1,5 +1,29 @@
 import java.util.*;
 
+// Custom Object representing a Bogie
+class Bogie {
+    private String name;
+    private int capacity;
+
+    public Bogie(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    @Override
+    public String toString() {
+        return name + " -> " + capacity;
+    }
+}
+
 public class TrainConsistManagementApp {
     public static void main(String[] args){
         // ================= UC1 =================
@@ -158,5 +182,35 @@ public class TrainConsistManagementApp {
         System.out.println();
 
         System.out.println("UC6 bogie-capacity mapping completed...\n");
+
+        // -------------UC7----------
+
+        System.out.println("========================================");
+        System.out.println(" UC7 - Sort Bogies by Capacity (Comparator) ");
+        System.out.println("========================================\n");
+
+        // Create a List to store custom Bogie objects
+        List<Bogie> bogieObjects = new ArrayList<>();
+        bogieObjects.add(new Bogie("Sleeper", 72));
+        bogieObjects.add(new Bogie("AC Chair", 56));
+        bogieObjects.add(new Bogie("First Class", 24));
+        bogieObjects.add(new Bogie("General", 90));
+
+        System.out.println("Before Sorting:");
+        for (Bogie b : bogieObjects) {
+            System.out.println(b);
+        }
+        System.out.println();
+
+        // Apply a Comparator to sort by capacity using a Lambda expression / Method Reference
+        bogieObjects.sort(Comparator.comparingInt(Bogie::getCapacity));
+
+        System.out.println("After Sorting by Capacity:");
+        for (Bogie b : bogieObjects) {
+            System.out.println(b);
+        }
+        System.out.println();
+
+        System.out.println("UC7 sorting completed...");
     }
 }
